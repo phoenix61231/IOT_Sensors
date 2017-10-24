@@ -9,11 +9,13 @@ reboot
 sudo apt-get update
 
 OLED:
+
 sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
 sudo pip install RPi.GPIO
 sudo python setup.py install
 
 DHT22:
+
 sudo apt-get install build-essential python-dev
 sudo python setup.py install
 
