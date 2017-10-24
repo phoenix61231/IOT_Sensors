@@ -39,3 +39,7 @@ sudo apt-get install build-essential python-dev
 
 sudo python setup.py install
 
+connect 0.96 inches OLED module to I2C 0 port
+
+connect DHT22 module signal wire to GPIO 4 port
+
