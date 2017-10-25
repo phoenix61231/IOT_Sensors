@@ -45,7 +45,7 @@ pip install paho-mqtt
 
 git clone https://github.com/eclipse/paho.mqtt.python.git
 
-cd paoh.mqtt.python
+cd paho.mqtt.python
 
 python setup.py install
 
