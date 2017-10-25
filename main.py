@@ -15,20 +15,9 @@ import paho.mqtt.client as mqtt
 import thread
 import os
 
-def on_message(client, userdata, message):
-    print("\n" + str(message.pyload.decode("utf-8")+ " (" + message.topic + ")") + "\n")
 
-def publish(name):
-	global temperature
-	global humidity
-	
-    client.loop_start()  # start the loop
-    print("Subscribing to topic : " + topic)
-    client.subscribe(topic)
-    while 1:
-        line = "%s: Temperature : %0.1f Humidity : %0.1f"%name, temperature, humidity
-        client.publish(topic, line)
-		time.sleep(5)
+def on_message(client, userdata, message):
+	print(str(message.payload.decode("utf-8") + " (" + message.topic + ")"))		
 
 # Raspberry Pi pin configuration:
 RST = None     # on the PiOLED this pin isnt used
@@ -88,11 +77,12 @@ pin = '4'
 # the results will be null (because Linux can't
 # guarantee the timing of calls to read the sensor).
 # If this happens try again!
+# Modify the broker ip here, default will be uscclab server
 broker_address = "140.116.82.42"
 
 # create new instance , change the instance name here to avoid crash
 print("creating new instance")
-instance = "Node 1"
+instance = "module_001"
 client = mqtt.Client(instance)
 client.on_message = on_message
 
@@ -102,15 +92,15 @@ client.connect(broker_address)  # connect to broker
 # Enter the topic to subscribe here, web default is "mqtt/demo"
 topic = "mqtt/demo"
 
-# start a new thread to pending user input and publish
-thread.start_new_thread(publish, (instance,)) # format: start_new_thread(function_name ,("args","second args"))
+client.loop_start()  # start the loop
+print("Subscribing to topic : " + topic)
+client.subscribe(topic)
 
 while True:
     # Try to grab a sensor reading. Use the read_retry method which will retry up
     # to 15 times to get a sensor readinf (waiting 2 second between each retry).
-
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-
+    
     if humidity is not None and temperature is not None:
         print('Temperature={0:0.1f}*C Humidity={1:0.1f}%'.format(temperature,humidity))
     else:
@@ -127,6 +117,9 @@ while True:
     cmd = "free -m | awk 'NR==2{printf \"MEM: %.2f%%\", $3*100/$2 }'"
     MemUsage = subprocess.check_output(cmd, shell = True )
     
+    line = instance + ' ' + IP + ' Temperature={0:0.1f}*C Humidity={1:0.1f}%'.format(temperature,humidity)
+    client.publish(topic, line)
+
     # Icons
     draw.text((x, top),       unichr(61931),  font=font2, fill=255) #wifi icon
     draw.text((x, top+15),    unichr(62171),  font=font_icon_big, fill=255) #cpu icon
