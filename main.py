@@ -65,17 +65,17 @@ sensor = Adafruit_DHT.DHT22
 # connected to GPIO4
 pin = '4'
 
-# Try to grab a sensor reading. Use the read_retry method which will retry up
-# to 15 times to get a sensor readinf (waiting 2 second between each retry).
-
-humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-
 # Note that sometimes you won't get a readin and
 # the results will be null (because Linux can't
 # guarantee the timing of calls to read the sensor).
 # If this happens try again!
 
 while True:
+    # Try to grab a sensor reading. Use the read_retry method which will retry up
+    # to 15 times to get a sensor readinf (waiting 2 second between each retry).
+
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+
     if humidity is not None and temperature is not None:
         print('Temperature={0:0.1f}*C Humidity={1:0.1f}%'.format(temperature,humidity))
     else:
