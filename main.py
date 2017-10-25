@@ -11,6 +11,25 @@ from PIL import ImageFont
 
 import subprocess
 
+import paho.mqtt.client as mqtt
+import thread
+import os
+
+def on_message(client, userdata, message):
+    print("\n" + str(message.pyload.decode("utf-8")+ " (" + message.topic + ")") + "\n")
+
+def publish(name):
+	global temperature
+	global humidity
+	
+    client.loop_start()  # start the loop
+    print("Subscribing to topic : " + topic)
+    client.subscribe(topic)
+    while 1:
+        line = "%s : Temperature : %0.1f Humidity : %0.1f"%name, temperature, humidity
+        client.publish(topic, line)
+		time.sleep(5)
+
 # Raspberry Pi pin configuration:
 RST = None     # on the PiOLED this pin isnt used
 # Note the following are only used with SPI:
@@ -69,6 +88,22 @@ pin = '4'
 # the results will be null (because Linux can't
 # guarantee the timing of calls to read the sensor).
 # If this happens try again!
+broker_address = "140.116.82.42"
+
+# create new instance , change the instance name here to avoid crash
+print("creating new instance")
+instance = "Node 1"
+client = mqtt.Client(instance)
+client.on_message = on_message
+
+print("connecting to broker at " + broker_address)
+client.connect(broker_address)  # connect to broker
+
+# Enter the topic to subscribe here, web default is "mqtt/demo"
+topic = "mqtt/demo"
+
+# start a new thread to pending user input and publish
+thread.start_new_thread(publish, (instance,)) # format: start_new_thread(function_name ,("args","second args"))
 
 while True:
     # Try to grab a sensor reading. Use the read_retry method which will retry up
