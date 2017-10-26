@@ -1,7 +1,7 @@
 # IOT_Sensors
 IOT Sensors Proj
 
-sudo rasp-config
+sudo raspi-config
 
 1. enable ssh
 
