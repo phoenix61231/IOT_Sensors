@@ -7,6 +7,8 @@ sudo raspi-config
 
 2. enable i2c
 
+3. enable spi
+
 reboot
 
 sudo apt-get update
