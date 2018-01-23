@@ -39,6 +39,14 @@ cd Adafruit_Python_DHT
 
 sudo apt-get install build-essential python-dev
 
+BMP180:
+
+sudo git clone https://github.com/adafruit/Adafruit_Python_BMP
+
+cd Adafruit_Python_BMP
+
+sudo python setup.py install
+
 sudo python setup.py install
 
 Paho:
