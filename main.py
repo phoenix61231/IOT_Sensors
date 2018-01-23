@@ -15,7 +15,6 @@ import paho.mqtt.client as mqtt
 import thread
 import os
 
-<<<<<<< HEAD
 import spidev
 
 import Adafruit_BMP.BMP085 as BMP085
@@ -76,14 +75,7 @@ def getuv(ch,deci):
     else:
         print('.')
     return uv_data
-    
-    
-=======
 
-def on_message(client, userdata, message):
-	print(str(message.payload.decode("utf-8") + " (" + message.topic + ")"))		
-
->>>>>>> 10e8c040dd78000fc88a56470740de45dee116d7
 # Raspberry Pi pin configuration:
 RST = None     # on the PiOLED this pin isnt used
 # Note the following are only used with SPI:
@@ -130,21 +122,6 @@ font2 = ImageFont.truetype('fontawesome-webfont.ttf', 14)
 font_icon_big = ImageFont.truetype('fontawesome-webfont.ttf', 20)
 font_text_big = ImageFont.truetype('Montserrat-Medium.ttf', 19)
 
-<<<<<<< HEAD
-=======
-# Sensor should be set to Adafruit_DHT.DHT11,
-# Adafruit_DHT.DHT22, or Adafruit_DHT.AM2302.
-sensor = Adafruit_DHT.DHT22
-
-# Example using a Raspberry Pi with DHT sensor
-# connected to GPIO4
-pin = '4'
-
->>>>>>> 10e8c040dd78000fc88a56470740de45dee116d7
-# Note that sometimes you won't get a readin and
-# the results will be null (because Linux can't
-# guarantee the timing of calls to read the sensor).
-# If this happens try again!
 # Modify the broker ip here, default will be uscclab server
 broker_address = "140.116.82.42"
 
@@ -163,7 +140,6 @@ topic = "mqtt/demo"
 client.loop_start()  # start the loop
 print("Subscribing to topic : " + topic)
 client.subscribe(topic)
-<<<<<<< HEAD
 
 print('----------------------------------------')
 
@@ -176,18 +152,6 @@ while True:
     bmp180 = BMP085.BMP085()
     pressure_value = bmp180.read_pressure()
     print "Air Pressure : {0:0.3f} kPa\n".format(pressure_value/1000.0)
-=======
-
-while True:
-    # Try to grab a sensor reading. Use the read_retry method which will retry up
-    # to 15 times to get a sensor readinf (waiting 2 second between each retry).
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    
-    if humidity is not None and temperature is not None:
-        print('Temperature={0:0.1f}*C Humidity={1:0.1f}%'.format(temperature,humidity))
-    else:
-        print(".")
->>>>>>> 10e8c040dd78000fc88a56470740de45dee116d7
 
     # Draw a black filled box to clear the image.
     draw.rectangle((0,0,width,height), outline=0, fill=0)
@@ -200,11 +164,9 @@ while True:
     cmd = "free -m | awk 'NR==2{printf \"MEM: %.2f%%\", $3*100/$2 }'"
     MemUsage = subprocess.check_output(cmd, shell = True )
     
-<<<<<<< HEAD
+
     line = instance + ' ' + IP + '\nTemperature:{0:0.1f} Humidity:{1:0.1f} Light:{2:d} UV:{3:d} Soil:{4:d} Pressure:{5:0.3f}'.format(humidity_value, temperature_value, light_value, uv_value, soil_value, pressure_value/1000.0)
-=======
-    line = instance + ' ' + IP + ' Temperature={0:0.1f}*C Humidity={1:0.1f}%'.format(temperature,humidity)
->>>>>>> 10e8c040dd78000fc88a56470740de45dee116d7
+
     client.publish(topic, line)
 
     # Icons
