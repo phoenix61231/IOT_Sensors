@@ -8,9 +8,17 @@ sudo raspi-config
 
 3. enable spi
 
+4. enable console and autologin
+
+5. enable wait for network at boot
+
 reboot
 
 sudo apt-get update
+
+auto launch :
+
+https://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
 main:
 
@@ -62,4 +70,14 @@ python setup.py install
 
 connect 0.96 inches OLED module to I2C 0 port
 
+connect BMP180 module to I2C 0 port
+
 connect DHT22 module signal wire to GPIO 4 port
+
+connect MCP3008 ADC to Pi
+
+connect TEMT600 module to MCP3008 0
+
+connect GUVA-S12SD module to MCP3008 1
+
+connect FC-28 module to MCP3008 2
