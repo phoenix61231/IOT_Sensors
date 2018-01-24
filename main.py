@@ -115,12 +115,14 @@ bottom = height-padding
 x = 0
 
 # Load default font.
+
 font = ImageFont.load_default()
 
-font = ImageFont.truetype('Montserrat-Light.ttf', 12)
-font2 = ImageFont.truetype('fontawesome-webfont.ttf', 14)
-font_icon_big = ImageFont.truetype('fontawesome-webfont.ttf', 20)
-font_text_big = ImageFont.truetype('Montserrat-Medium.ttf', 19)
+font = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/Montserrat-Light.ttf', 12)
+font2 = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/fontawesome-webfont.ttf', 14)
+font_icon_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/fontawesome-webfont.ttf', 20)
+font_text_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/Montserrat-Medium.ttf', 19)
+
 
 # Modify the broker ip here, default will be uscclab server
 broker_address = "140.116.82.42"
@@ -165,10 +167,11 @@ while True:
     MemUsage = subprocess.check_output(cmd, shell = True )
     
 
-    line = instance + ' ' + IP + '\nTemperature:{0:0.1f} Humidity:{1:0.1f} Light:{2:d} UV:{3:d} Soil:{4:d} Pressure:{5:0.3f}'.format(humidity_value, temperature_value, light_value, uv_value, soil_value, pressure_value/1000.0)
+    line = instance + ' ' + IP + '\nTemperature:{0:0.1f} Humidity:{1:0.1f} Light:{2:d} UV:{3:d} Soil:{4:d} Pressure:{5:0.3f}'.format(temperature_value, humidity_value, light_value, uv_value, soil_value, pressure_value/1000.0)
 
     client.publish(topic, line)
 
+    
     # Icons
     draw.text((x, top),       unichr(61931),  font=font2, fill=255) #wifi icon
     draw.text((x, top+15),    unichr(62171),  font=font_icon_big, fill=255) #cpu icon
@@ -180,7 +183,7 @@ while True:
     # Display image.
     disp.image(image)
     disp.display()
-
+    
     print "Ctrl + C to exit"
     print "----------------------------------------"
     time.sleep(5)
