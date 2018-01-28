@@ -1,6 +1,6 @@
+font
 Adafruit_Python_BMP
-Adafruit_Python_DHT
 Adafruit_Python_SSD1306
+Adafruit_Python_DHT
 paho.mqtt.python
-main_1.py
-
+*.py[cod]

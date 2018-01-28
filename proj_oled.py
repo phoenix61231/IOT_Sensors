@@ -9,10 +9,10 @@ from PIL import ImageFont
 
 def load_font():
     #font = ImageFont.load_default()	
-    font = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/Montserrat-Light.ttf', 12)
-    font2 = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/fontawesome-webfont.ttf', 14)
-    font_icon_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/fontawesome-webfont.ttf', 20)
-    font_text_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/Montserrat-Medium.ttf', 19)
+    font = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/font/Montserrat-Light.ttf', 12)
+    font2 = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/font/fontawesome-webfont.ttf', 14)
+    font_icon_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/font/fontawesome-webfont.ttf', 20)
+    font_text_big = ImageFont.truetype('/home/pi/Desktop/IOT_Sensors/font/Montserrat-Medium.ttf', 19)
 	
     return font, font2, font_icon_big, font_text_big
 	
