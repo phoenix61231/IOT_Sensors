@@ -52,7 +52,8 @@ while True:
     
     data_time = str(datetime.now())    
     print(data_time)
-    line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + ' / ' + data_time
+
+    line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + ' / Time:' + data_time
 	
     line_state = instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + data_time
  
@@ -71,4 +72,4 @@ while True:
     disp.display()
 	
     print "----------------------------------------"
-    time.sleep(30)
+    time.sleep(3)
