@@ -26,7 +26,7 @@ def get_soil(ch, deci, spi):
     data = read_adc(ch, spi)
     volts = convert_volts(data, deci)
     
-    #print('Soil Moisture : {0:0.2f} mV'.format(volts))
+    print('Soil Moisture : {0:0.2f} mV'.format(volts))
     	
     return volts
 
@@ -34,7 +34,7 @@ def get_light(ch, deci, spi):
     data = read_adc(ch, spi)
     volts = convert_volts(data, deci)
     
-    #print('Light : {0:0.2f} mV'.format(volts))
+    print('Light : {0:0.2f} mV'.format(volts))
     	
     return volts
 
@@ -42,6 +42,6 @@ def get_uv(ch, deci, spi):
     data = read_adc(ch, spi)
     volts = convert_volts(data, deci)
    
-    #print('UV : {0:0.2f} mV'.format(volts))
+    print('UV : {0:0.2f} mV'.format(volts))
     		
     return volts

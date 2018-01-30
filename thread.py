@@ -57,8 +57,8 @@ def data_thread():
         soil_value = proj_adc.get_soil(2, 2, spi)
 	
         data_time = str(datetime.now())
-        #print(data_time)
-        print("Data Get.")
+        print(data_time)
+        print("--------------------")
 
 def status_thread():
     global IP, CPU, MemUsage, status_time
@@ -73,7 +73,6 @@ def status_thread():
         MemUsage = subprocess.check_output(cmd, shell = True )
 
         status_time = str(datetime.now())
-        print("Status Get.")
 	
 def oled_thread():
     global IP, CPU, MemUsage
@@ -103,7 +102,7 @@ def send_data_thread():
     global client_data, instance_data, topic_data, data_time, IP
 
     while True:
-        time.sleep(5)
+        time.sleep(30)
         temperature = ' / Temperature:{0:0.1f} '.format(temperature_value)
         humidity = '/ Humidity:{0:0.1f} '.format(humidity_value)
         light = '/ Light:{0:0.2f} '.format(light_value)
@@ -113,18 +112,16 @@ def send_data_thread():
 
         line_data = instance_data + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
-        client_data.publish(topic_data, line_data)
-        print("Send Data.")      
+        client_data.publish(topic_data, line_data)      
 
 def send_status_thread():
     global status_time, topic_status, client_status
     global IP, CPU, MemUsage, instance_status
 
     while True:
-        time.sleep(5)
+        time.sleep(30)
         line_status = instance_status + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + status_time
         client_status.publish(topic_status, line_status)
-        print("Send Status.")
         
 
 
