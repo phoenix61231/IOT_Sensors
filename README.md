@@ -70,6 +70,10 @@ cd paho.mqtt.python
 
 python setup.py install
 
+Wifi:
+
+pip install wifi
+
 
 
 connect 0.96 inches OLED module to I2C 0 port
