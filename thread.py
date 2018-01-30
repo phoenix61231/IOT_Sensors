@@ -46,8 +46,7 @@ def data_thread():
     global spi, data_time
     global humidity_value, temperature_value, pressure_value
     global light_value, uv_value, soil_value
-
-	
+    
     while True:
         humidity_value, temperature_value = proj_sensors.get_dht22('4')	
         pressure_value = proj_sensors.get_bmp180()
@@ -112,8 +111,8 @@ def send_data_thread():
 
         line_data = instance_data + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
-        client_data.publish(topic_data, line_data)      
-
+        client_data.publish(topic_data, line_data)
+    
 def send_status_thread():
     global status_time, topic_status, client_status
     global IP, CPU, MemUsage, instance_status
@@ -123,7 +122,6 @@ def send_status_thread():
         line_status = instance_status + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + status_time
         client_status.publish(topic_status, line_status)
         
-
 
 data_t = Thread(target=data_thread, name="data_t")
 data_t.start()
