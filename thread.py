@@ -41,7 +41,10 @@ CPU = ''
 MemUsage = ''
 
 def data_thread():
-    global spi
+    global spi, data_time
+    global humidity_value, temperature_value, pressure_value
+    global light_value, uv_value, soil_value
+
 	
     while True:
     	humidity_value, temperature_value = proj_sensors.get_dht22('4')	
@@ -56,7 +59,7 @@ def data_thread():
 	
 	print "----------------------------------------"
 	time.sleep(3)
-	
+
 def status_thread():
     global IP, CPU, MemUsage, status_time
 
@@ -69,7 +72,7 @@ def status_thread():
 	cmd = "free -m | awk 'NR==2{printf \"MEM: %.2f%%\", $3*100/$2 }'"
 	MemUsage = subprocess.check_output(cmd, shell = True )
 
-        status_time = str(datatime.now())
+        status_time = str(datetime.now())
         time.sleep(3)
 	
 def oled_thread():
@@ -96,9 +99,10 @@ def oled_thread():
 def send_data_thread():
     global temperature_value, humidity_value, pressure_value
     global light_value, uv_value, soil_value
-    global client_data, instance, topic_data, data_time
+    global client_data, instance, topic_data, data_time, IP
 
     while True:
+        time.sleep(10)
 	temperature = ' / Temperature:{0:0.1f} '.format(temperature_value)
 	humidity = '/ Humidity:{0:0.1f} '.format(humidity_value)
 	light = '/ Light:{0:0.2f} '.format(light_value)
@@ -109,30 +113,33 @@ def send_data_thread():
     	line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
 	client_data.publish(topic_data, line_data)
-        time.sleep(3)
+        print("Send Data.")
+        
 
 def send_status_thread():
-    global status_time, topic_status
+    global status_time, topic_status, client_status
+    global IP, CPU, MemUsage, instance
+
     while True:
+        time.sleep(10)
 	line_status = instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + status_time
 	client_status.publish(topic_status, line_status)
-        time.sleep(3)
+        print("Send Status.")
+        
 
-data_t = Thread(target=data_thread())
+
+data_t = Thread(target=data_thread, name="data_t")
 data_t.start()
 
-status_t = Thread(target=status_thread())
+status_t = Thread(target=status_thread, name="status_t")
 status_t.start()
 
-oled_t = Thread(target=oled_thread())
+oled_t = Thread(target=oled_thread, name="oled_t")
 oled_t.start()
 
-send_data_t = Thread(target=send_data_thread())
-send_data_t.start
+send_data_t = Thread(target=send_data_thread, name="send_data_t")
+send_data_t.start()
 
-send_status_t = Thread(target=send_status_thread())
+send_status_t = Thread(target=send_status_thread, name="send_status_t")
 send_status_t.start()
 
-
-while True:
-    pass
