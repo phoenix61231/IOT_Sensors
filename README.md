@@ -16,11 +16,11 @@ reboot
 
 sudo apt-get update
 
-Wifi auto connect (had connected before):
+Wifi auto reconnect (had connected before):
 
 http://alexba.in/blog/2015/01/14/automatically-reconnecting-wifi-on-a-raspberrypi/
 
-auto launch :
+Auto launch :
 
 https://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
