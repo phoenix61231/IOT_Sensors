@@ -113,7 +113,7 @@ def send_data_thread():
     	line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
 	client_data.publish(topic_data, line_data)
-        print("Send Data.")
+        print("----------\nSend Data.\n----------")
         
 
 def send_status_thread():
@@ -124,7 +124,7 @@ def send_status_thread():
         time.sleep(10)
 	line_status = instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + status_time
 	client_status.publish(topic_status, line_status)
-        print("Send Status.")
+        print("----------\nSend Status.\n----------")
         
 
 
