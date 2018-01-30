@@ -10,7 +10,7 @@ import proj_mqtt
 import proj_adc
 
 ip_address = "140.116.82.42"
-instance = "module_002"
+instance = "module_001"
 topic_data = "mqtt/data"
 topic_status = "mqtt/status"
 
@@ -109,14 +109,14 @@ def send_data_thread():
     	line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
 	client_data.publish(topic_data, line_data)
-        time.sleep(10)
+        time.sleep(3)
 
 def send_status_thread():
     global status_time, topic_status
     while True:
 	line_status = instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + status_time
 	client_status.publish(topic_status, line_status)
-        time.sleep(10)
+        time.sleep(3)
 
 data_t = Thread(target=data_thread())
 data_t.start()
