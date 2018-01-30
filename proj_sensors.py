@@ -13,6 +13,6 @@ def get_dht22(pin):
 def get_bmp180():
     bmp180 = BMP085.BMP085()
     pressure = bmp180.read_pressure()
-    print "Air Pressure : {0:0.3f} kPa\n".format(pressure/1000.0)
+    print "Air Pressure : {0:0.3f} kPa".format(pressure/1000.0)
 	
     return pressure

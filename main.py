@@ -51,9 +51,9 @@ while True:
     pressure = '/ Air Pressure:{0:0.3f} '.format(pressure_value/1000.0)
     
     data_time = str(datetime.now())    
-    print(data_time)
+    print(data_time + '\n')
 
-    line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + ' / Time:' + data_time
+    line_data = instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
     line_state = instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + data_time
  
