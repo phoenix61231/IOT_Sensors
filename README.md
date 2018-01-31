@@ -17,6 +17,7 @@ reboot
 sudo apt-get update
 
 sudo apt-get install vim
+
 sudo apt-get install git
 
 Wifi auto reconnect (had connected before):
