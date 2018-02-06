@@ -20,6 +20,10 @@ sudo apt-get install vim
 
 sudo apt-get install git
 
+Connect to Wifi:
+
+https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+
 Wifi auto reconnect (had connected before):
 
 http://alexba.in/blog/2015/01/14/automatically-reconnecting-wifi-on-a-raspberrypi/
