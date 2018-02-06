@@ -10,7 +10,7 @@ sudo raspi-config
 
 4. enable console and autologin
 
-5. enable wait for network at boot
+5. enable wait for network at boot (optional)
 
 reboot
 
