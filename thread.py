@@ -13,7 +13,7 @@ import proj_mqtt
 import proj_adc
 
 #the mqtt client setting
-ip_address = "140.116.82.42"
+ip_address = "192.168.137.151"
 instance_data = "module_001_data"
 instance_status = "module_001_status"
 topic_data = "mqtt/data"
@@ -119,7 +119,7 @@ def send_data_thread():
     global client_data, instance_data, topic_data, data_time, IP
 
     while True:
-        time.sleep(60)
+        time.sleep(10) #fix to 60
         temperature = ' / Temperature:{0:0.1f} '.format(temperature_value)
         humidity = '/ Humidity:{0:0.1f} '.format(humidity_value)
         light = '/ Light:{0:0.2f} '.format(light_value)
@@ -136,6 +136,7 @@ def send_data_thread():
             with open('data.txt', 'a') as file:
                 file.write(line_data + '\n')
                 print("Save to data.txt file.")
+                print("--------------------")
             
 
 #define send status thread
@@ -145,7 +146,7 @@ def send_status_thread():
     global IP, CPU, MemUsage, instance_status
 
     while True:
-        time.sleep(30)
+        time.sleep(10) #fix to 30
         line_status = instance_status + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + wifi_signal + ' / ' + str(wifi_quality) + ' / ' +status_time
         info = client_status.publish(topic_status, line_status)
         
@@ -154,6 +155,7 @@ def send_status_thread():
             with open('status.txt', 'a') as file:
                 file.write(line_status + '\n')
                 print("Save to status.txt file.")
+                print("--------------------")
             
 
 #define wifi connection detect thread
