@@ -1,1 +1,0 @@
-module_001_data / 192.168.137.49 / Temperature:16.9 / Humidity:87.3 / Light:0.00 / UV:0.00 / Soil:0.00 / Air Pressure:101.663 / Time:2018-02-07 16:47:40.394307
