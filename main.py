@@ -15,13 +15,13 @@ topic_data = "mqtt/data"
 
 client = proj_mqtt.init_mqtt(ip_address, instance, topic_data)
 spi = proj_adc.init_adc(0, 0)
-RST = proj_oled.init_connect()
-font, font2, font_icon_big, font_text_big = proj_oled.load_font()
+#RST = proj_oled.init_connect()
+#font, font2, font_icon_big, font_text_big = proj_oled.load_font()
 
-disp = proj_oled.init_disp(RST)
-width, height = proj_oled.def_size(disp)
-x, top = proj_oled.draw_shape(height)
-image, draw = proj_oled.create_blank(width, height)
+#disp = proj_oled.init_disp(RST)
+#width, height = proj_oled.def_size(disp)
+#x, top = proj_oled.draw_shape(height)
+#image, draw = proj_oled.create_blank(width, height)
 
 
 while True:
@@ -32,8 +32,8 @@ while True:
     uv_value = proj_adc.get_uv(1, 2, spi)
     soil_value = proj_adc.get_soil(2, 2, spi)
 	
-    # Draw a black filled box to clear the image.
-    draw.rectangle((0,0,width,height), outline=0, fill=0)
+    """# Draw a black filled box to clear the image.
+    draw.rectangle((0,0,width,height), outline=0, fill=0)"""
 
     # Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
     cmd = "hostname -I | cut -d\' \' -f1 | head --bytes -1"
@@ -59,7 +59,7 @@ while True:
  
     client.publish(topic_data, line_data)
 		
-    # Icons
+    """# Icons
     draw.text((x, top),       unichr(61931),  font=font2, fill=255) #wifi icon
     draw.text((x, top+15),    unichr(62171),  font=font_icon_big, fill=255) #cpu icon
 	
@@ -69,7 +69,7 @@ while True:
 	
     # Display image.
     disp.image(image)
-    disp.display()
+    disp.display()"""
 	
     print "----------------------------------------"
     time.sleep(3)

@@ -13,7 +13,7 @@ import proj_mqtt
 import proj_adc
 
 #the mqtt client setting
-ip_address = "192.168.137.151"
+ip_address = "192.168.137.211"
 instance_data = "module_001_data"
 instance_status = "module_001_status"
 topic_data = "mqtt/data"
@@ -198,3 +198,4 @@ send_status_t.start()
 
 wifi_connection_detect_t = Thread(target=wifi_connection_detect_thread, name="connection_detect_t")
 wifi_connection_detect_t.start()
+
