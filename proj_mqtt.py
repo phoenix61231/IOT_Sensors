@@ -1,9 +1,19 @@
 import paho.mqtt.client as mqtt
 import thread
+from datetime import datetime
 
 
 def on_message(client, userdata, message):
     print(str(message.payload.decode("utf-8") + " (" + message.topic + ")"))
+
+def on_connect(client, userdata, flags, rc):
+    with open('log.txt','a') as file:
+        file.write('on_onnect '+str(datetime.now())+str(rc)+'\n')
+
+def on_disconnect(client, userdata, rc):
+    with open('log.txt','a') as file:
+        file.write('on_disconnect '+str(datetime.now())+str(rc)+'\n')
+
 
 def init_mqtt(broker_address, instance, topic):
     default_address = "140.116.82.42"
@@ -17,6 +27,8 @@ def init_mqtt(broker_address, instance, topic):
     print("creating new instance")	
     client = mqtt.Client(instance)
     client.on_message = on_message
+    client.on_connect = on_connect
+    client.on_disconnect = on_disconnect
     
     print("connecting to broker at " + broker_address)
     client.connect_async(broker_address, keepalive=15)  # connect to broker

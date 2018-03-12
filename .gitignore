@@ -6,3 +6,4 @@ paho.mqtt.python
 *.py[cod]
 data.txt
 status.txt
+log.txt
