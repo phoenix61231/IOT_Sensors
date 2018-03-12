@@ -32,13 +32,17 @@ Auto launch :
 
 https://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
+Static IP Address:
+
+http://yehnan.blogspot.tw/2016/05/raspberry-piipdhcpcd.html
+
 main:
 
 sudo git clone https://github.com/phoenix61231/IOT_Sensors
 
 Clone repositories below under the IOT_Sensors folder 
 
-OLED:
+OLED(optional):
 
 sudo git clone https://github.com/adafruit/Adafruit_Python_SSD1306
 
@@ -84,7 +88,7 @@ pip install wifi
 
 
 
-connect 0.96 inches OLED module to I2C 0 port
+connect 0.96 inches OLED module to I2C 0 port(optional)
 
 connect BMP180 module to I2C 0 port
 
