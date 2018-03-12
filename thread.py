@@ -13,7 +13,7 @@ import proj_mqtt
 import proj_adc
 
 #the mqtt client setting
-ip_address = "192.168.137.211"
+ip_address = "172.20.10.8"
 instance_data = "module_001_data"
 instance_status = "module_001_status"
 topic_data = "mqtt/data"
@@ -187,7 +187,7 @@ data_t.start()
 status_t = Thread(target=status_thread, name="status_t")
 status_t.start()
 
-oled_t = Thread(target=oled_thread, name="oled_t")
+#oled_t = Thread(target=oled_thread, name="oled_t")
 #oled_t.start()
 
 send_data_t = Thread(target=send_data_thread, name="send_data_t")
