@@ -1,5 +1,6 @@
 import time
 import subprocess
+import sys
 
 from datetime import datetime
 from threading import Thread
@@ -13,15 +14,30 @@ import proj_mqtt
 import proj_adc
 
 #the mqtt client setting
-ip_address = "172.20.10.8"
-instance_data = "module_001_data"
-instance_status = "module_001_status"
-topic_data = "mqtt/data"
-topic_status = "mqtt/status"
+
+def avahi_broswer(service):
+    output = subprocess.check_output('avahi-browse -r -t %s' % service,shell=True)
+    list_out = output.split("\n")
+    address = list_out[3].split(" = ")
+    ip_tmp = address[1].split("[")
+    ip = ip_tmp[1].split("]")
+    return ip[0]
+
+
+ip_address = avahi_broswer('_mosquitto._tcp')
+instance = "module_001"
+gateway_name = "gateway_001"
+
+topic_data = "uscclab/gateway_001/module_001/data"
+topic_status = "uscclab/gateway_001/module_001/status"
+topic_warning = "uscclab/gateway_001/module_001/warning"
+
 
 #Initital the mqtt client
-client_data = proj_mqtt.init_mqtt(ip_address, instance_data, topic_data)
-client_status = proj_mqtt.init_mqtt(ip_address, instance_status, topic_status)
+client = proj_mqtt.init_mqtt(ip_address, instance)
+client.subscribe(topic_data)
+client.subscribe(topic_status)
+client.subscribe(topic_warning)
 
 #Decline the global variable
 humidity_value = 0.0
@@ -57,6 +73,7 @@ def data_thread():
         light_value = proj_adc.get_light(0, 2, spi)
         uv_value = proj_adc.get_uv(1, 2, spi)
         soil_value = proj_adc.get_soil(2, 2, spi)
+        #soil_value = 3000
 	
         data_time = str(datetime.now())
         print(data_time)
@@ -78,12 +95,12 @@ def status_thread():
         MemUsage = subprocess.check_output(cmd, shell = True )
 
         status_time = str(datetime.now())
-        time.sleep(5)
+        time.sleep(10)
 	
 
 #define the oled display thread
 #for initial and oled display
-def oled_thread():
+"""def oled_thread():
     global IP, CPU, MemUsage
 
     RST = proj_oled.init_connect()
@@ -109,17 +126,17 @@ def oled_thread():
 	
         # Display image.
         disp.image(image)
-        disp.display()
+        disp.display()"""
 
 #define send data thread
 #for the sending data operation with publish error detect
 def send_data_thread():
     global temperature_value, humidity_value, pressure_value
     global light_value, uv_value, soil_value
-    global client_data, instance_data, topic_data, data_time, IP
+    global client, instance, topic_data, data_time, IP, gateway_name
 
     while True:
-        time.sleep(10) #fix to 60
+        time.sleep(30) #fix to 60
         temperature = ' / Temperature:{0:0.1f} '.format(temperature_value)
         humidity = '/ Humidity:{0:0.1f} '.format(humidity_value)
         light = '/ Light:{0:0.2f} '.format(light_value)
@@ -127,41 +144,48 @@ def send_data_thread():
         soil = '/ Soil:{0:0.2f} '.format(soil_value)
         pressure = '/ Air Pressure:{0:0.3f} '.format(pressure_value/1000.0)    
 
-        line_data = instance_data + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
+        line_data = gateway_name + ' / ' + instance + ' / ' + IP + temperature + humidity + light + uv + soil + pressure + '/ Time:' + data_time
 	
-        info = client_data.publish(topic_data, line_data)
+        info = client.publish(topic_data, line_data)
 
         if info.rc is not 0:
             #save to .txt
             with open('data.txt', 'a') as file:
                 file.write(line_data + '\n')
-                print("Save to data.txt file.")
-                print("--------------------")
+            
+            with open('log.txt', 'a') as file:
+                file.write('Publish error (data) Saved. '+str(datetime.now())+'\n')
+        else:
+            with open('log.txt', 'a') as file:
+                file.write('Publish success (data) '+str(datetime.now())+'\n')
             
 
 #define send status thread
 #for the sending data operation with publish error detect
 def send_status_thread():
-    global status_time, topic_status, client_status
-    global IP, CPU, MemUsage, instance_status
+    global status_time, topic_status, client
+    global IP, CPU, MemUsage, instance, gateway_name
 
     while True:
         time.sleep(10) #fix to 30
-        line_status = instance_status + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + wifi_signal + ' / ' + str(wifi_quality) + ' / ' +status_time
-        info = client_status.publish(topic_status, line_status)
+        line_status = gateway_name + ' / ' + instance + ' / ' + IP + ' / CPU:' + CPU + ' / ' + MemUsage + ' / ' + wifi_signal + ' / ' + str(wifi_quality) + ' / ' +status_time
+        info = client.publish(topic_status, line_status)
         
+
         if info.rc is not 0:
             #save to .txt
             with open('status.txt', 'a') as file:
                 file.write(line_status + '\n')
-                print("Save to status.txt file.")
-                print("--------------------")
-            
+
+            with open('log.txt','a') as file:
+                file.write('Publish error (status) Saved '+str(datetime.now())+'\n')            
+        else:
+            with open('log.txt','a') as file:
+                file.write('Publish success (status) '+str(datetime.now())+'\n')
 
 #define wifi connection detect thread
 #for the wifi connection signal and quality detect
-def wifi_connection_detect_thread():
-	
+def wifi_connection_detect_thread():	
     global wifi_quality, wifi_signal
 
     while True:
@@ -180,6 +204,8 @@ def wifi_connection_detect_thread():
             wifi_quality = 'Wifi Connection Fail'
 
 	time.sleep(5)	
+
+
 
 data_t = Thread(target=data_thread, name="data_t")
 data_t.start()
