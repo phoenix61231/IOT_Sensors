@@ -72,7 +72,7 @@ def data_thread():
 
         light_value = proj_adc.get_light(0, 2, spi)
         uv_value = proj_adc.get_uv(1, 2, spi)
-        soil_value = proj_adc.get_soil(2, 2, spi)
+        soil_value = proj_adc.get_soil(2, 2, spi)/30.0
         #soil_value = 3000
 	
         data_time = str(datetime.now())

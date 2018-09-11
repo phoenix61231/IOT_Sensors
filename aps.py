@@ -78,8 +78,8 @@ def data_thread():
 
     light_value = proj_adc.get_light(0, 2, spi)
     uv_value = proj_adc.get_uv(1, 2, spi)
-    soil_value = proj_adc.get_soil(2, 2, spi)
-    #soil_value = 3000
+    soil_value = proj_adc.get_soil(2, 2, spi)/30.0
+    #soil_value = 0.0
 	
     data_time = str(datetime.now())
     print(data_time)
@@ -202,11 +202,11 @@ def wifi_connection_detect_thread():
         wifi_quality = 'Wifi Connection Fail'
 
 
-scheduler.add_job(data_thread, 'interval', seconds=15)
-scheduler.add_job(status_thread, 'interval', seconds=15)
+scheduler.add_job(data_thread, 'interval', seconds=10)
+scheduler.add_job(status_thread, 'interval', seconds=10)
 
-scheduler.add_job(send_data_thread, 'interval', seconds=60)
-scheduler.add_job(send_status_thread, 'interval', seconds=60)
+scheduler.add_job(send_data_thread, 'interval', seconds=15)
+scheduler.add_job(send_status_thread, 'interval', seconds=15)
 
 scheduler.add_job(wifi_connection_detect_thread, 'interval', seconds=5)
 
