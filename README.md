@@ -1,103 +1,103 @@
-IOT Sensors Proj
+# IOT Sensors Proj
 
-sudo raspi-config
+### sudo raspi-config
 
-1. enable ssh
+- 1. enable ssh
 
-2. enable i2c
+- 2. enable i2c
 
-3. enable spi
+- 3. enable spi
 
-4. enable console and autologin
+- 4. enable console and autologin
 
-5. enable wait for network at boot (optional)
+- 5. enable wait for network at boot (optional)
 
 reboot
 
-sudo apt-get update
+### sudo apt-get update
 
-sudo apt-get install vim
+### sudo apt-get install vim
 
-sudo apt-get install git
+### sudo apt-get install git
 
-Connect to Wifi:
+## Connect to Wifi:
 
 https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
-Wifi auto reconnect (had connected before):
+## Wifi auto reconnect (had connected before):
 
 http://alexba.in/blog/2015/01/14/automatically-reconnecting-wifi-on-a-raspberrypi/
 
-Auto launch :
+## Auto launch :
 
 https://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
-Static IP Address(optional):
+## Static IP Address(optional):
 
 http://yehnan.blogspot.tw/2016/05/raspberry-piipdhcpcd.html
 
-main:
+## main:
 
-sudo git clone https://github.com/phoenix61231/IOT_Sensors
+### sudo git clone https://github.com/phoenix61231/IOT_Sensors
 
 Clone repositories below under the IOT_Sensors folder 
 
-OLED(optional):
+## OLED(optional):
 
-sudo git clone https://github.com/adafruit/Adafruit_Python_SSD1306
+### sudo git clone https://github.com/adafruit/Adafruit_Python_SSD1306
 
-cd Adafruit_Python_SSD1306
+### cd Adafruit_Python_SSD1306
 
-sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
+### sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
 
-sudo pip install RPi.GPIO
+### sudo pip install RPi.GPIO
 
-sudo python setup.py install
+### sudo python setup.py install
 
-DHT22:
+## DHT22:
 
-sudo git clone https://github.com/adafruit/Adafruit_Python_DHT
+### sudo git clone https://github.com/adafruit/Adafruit_Python_DHT
 
-cd Adafruit_Python_DHT
+### cd Adafruit_Python_DHT
 
-sudo apt-get install build-essential python-dev
+### sudo apt-get install build-essential python-dev
 
-sudo python setup.py install
+### sudo python setup.py install
 
-BMP180:
+## BMP180:
 
-sudo git clone https://github.com/adafruit/Adafruit_Python_BMP
+### sudo git clone https://github.com/adafruit/Adafruit_Python_BMP
 
-cd Adafruit_Python_BMP
+### cd Adafruit_Python_BMP
 
-sudo python setup.py install
+### sudo python setup.py install
 
-Paho:
+## Paho:
 
-pip install paho-mqtt
+### pip install paho-mqtt
 
-git clone https://github.com/eclipse/paho.mqtt.python.git
+### git clone https://github.com/eclipse/paho.mqtt.python.git
 
-cd paho.mqtt.python
+### cd paho.mqtt.python
 
-python setup.py install
+### python setup.py install
 
-Wifi:
+## Wifi:
 
-pip install wifi
+### pip install wifi
 
 
 
-connect 0.96 inches OLED module to I2C 0 port(optional)
+- connect 0.96 inches OLED module to I2C 0 port(optional)
 
-connect BMP180 module to I2C 0 port
+- connect BMP180 module to I2C 0 port
 
-connect DHT22 module signal wire to GPIO 4 port
+- connect DHT22 module signal wire to GPIO 4 port
 
-connect MCP3008 ADC to Pi
+- connect MCP3008 ADC to Pi
 
-connect TEMT600 module to MCP3008 0
+- connect TEMT600 module to MCP3008 0
 
-connect GUVA-S12SD module to MCP3008 1
+- connect GUVA-S12SD module to MCP3008 1
 
-connect FC-28 module to MCP3008 2
+- connect FC-28 module to MCP3008 2
