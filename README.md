@@ -32,7 +32,7 @@ Auto launch :
 
 https://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
-Static IP Address:
+Static IP Address(optional):
 
 http://yehnan.blogspot.tw/2016/05/raspberry-piipdhcpcd.html
 
