@@ -14,11 +14,11 @@
 
 reboot
 
-### sudo apt-get update
+- sudo apt-get update
 
-### sudo apt-get install vim
+- sudo apt-get install vim
 
-### sudo apt-get install git
+- sudo apt-get install git
 
 ## Connect to Wifi:
 
@@ -38,53 +38,53 @@ http://yehnan.blogspot.tw/2016/05/raspberry-piipdhcpcd.html
 
 ## main:
 
-### sudo git clone https://github.com/phoenix61231/IOT_Sensors
+- sudo git clone https://github.com/phoenix61231/IOT_Sensors
 
 Clone repositories below under the IOT_Sensors folder 
 
 ## OLED(optional):
 
-### sudo git clone https://github.com/adafruit/Adafruit_Python_SSD1306
+- sudo git clone https://github.com/adafruit/Adafruit_Python_SSD1306
 
-### cd Adafruit_Python_SSD1306
+- cd Adafruit_Python_SSD1306
 
-### sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
+- sudo apt-get install build-essential python-dev python-pip python-imaging python-smbus git
 
-### sudo pip install RPi.GPIO
+- sudo pip install RPi.GPIO
 
-### sudo python setup.py install
+- sudo python setup.py install
 
 ## DHT22:
 
-### sudo git clone https://github.com/adafruit/Adafruit_Python_DHT
+- sudo git clone https://github.com/adafruit/Adafruit_Python_DHT
 
-### cd Adafruit_Python_DHT
+- cd Adafruit_Python_DHT
 
-### sudo apt-get install build-essential python-dev
+- sudo apt-get install build-essential python-dev
 
-### sudo python setup.py install
+- sudo python setup.py install
 
 ## BMP180:
 
-### sudo git clone https://github.com/adafruit/Adafruit_Python_BMP
+- sudo git clone https://github.com/adafruit/Adafruit_Python_BMP
 
-### cd Adafruit_Python_BMP
+- cd Adafruit_Python_BMP
 
-### sudo python setup.py install
+- sudo python setup.py install
 
 ## Paho:
 
-### pip install paho-mqtt
+- pip install paho-mqtt
 
-### git clone https://github.com/eclipse/paho.mqtt.python.git
+- git clone https://github.com/eclipse/paho.mqtt.python.git
 
-### cd paho.mqtt.python
+- cd paho.mqtt.python
 
-### python setup.py install
+- python setup.py install
 
 ## Wifi:
 
-### pip install wifi
+- pip install wifi
 
 
 
