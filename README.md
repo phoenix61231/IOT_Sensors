@@ -101,3 +101,27 @@ Clone repositories below under the IOT_Sensors folder
 - connect GUVA-S12SD module to MCP3008 1
 
 - connect FC-28 module to MCP3008 2
+
+
+## Functions
+
+- 1. 開機自動連線已知 Wifi AP
+
+- 2. 開機自動啟動
+
+- 3. Wifi 斷線自動重連
+
+- 4. 使用Network Service Discovery 自動搜尋網域中 Broker (Gateway & Module 連至同一AP)
+
+- 5. 環境感測
+
+- 6. Wifi 連線狀態監控
+
+- 7. 與MQTT Broker 連線狀態監控 (異常存至Local file)
+
+- 8. Log
+
+## Extra
+
+- 1. Power Saving Mode
+- 2. 異常數值傳至 warning
